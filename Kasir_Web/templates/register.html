@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Kasir Kantin SMK MUSA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            width: 300px;
+        }
+        h2 { text-align: center; margin-bottom: 20px; color: #333; }
+        input[type=text], input[type=password] {
+            width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;
+        }
+        input[type=submit] {
+            width: 100%; padding: 10px; background-color: #ff7e5f; border: none; border-radius: 5px;
+            color: white; font-weight: bold; cursor: pointer;
+        }
+        input[type=submit]:hover { background-color: #feb47b; }
+        p { text-align: center; }
+        a { color: #ff7e5f; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Register</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Daftar">
+        </form>
+        <p>Sudah punya akun? <a href="/login">Login di sini</a></p>
+    </div>
+</body>
+</html>

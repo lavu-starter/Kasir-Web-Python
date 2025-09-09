@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Transaksi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 220px;
+            background: #2c3e50;
+            color: white;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+        .sidebar h2 { margin-top: 0; }
+        .sidebar a {
+            color: white;
+            display: block;
+            margin: 15px 0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .sidebar a:hover { text-decoration: underline; }
+        .main {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            width: 750px;
+        }
+        h3 { margin-top: 0; color: #333; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th { background: #2575fc; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        a.edit { color: #27ae60; text-decoration: none; font-weight: bold; }
+        a.edit:hover { text-decoration: underline; }
+        a.delete { color: #e74c3c; text-decoration: none; font-weight: bold; }
+        a.delete:hover { text-decoration: underline; }
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: right;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Kasir</h2>
+        <p>Welcome, {{ user }}</p>
+        <a href="/dashboard/tambah">Tambah Transaksi</a>
+        <a href="/dashboard/daftar">Daftar Transaksi</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div class="main">
+        <div class="card">
+            <h3>Daftar Transaksi</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Item</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Total</th>
+                    <th>Aksi</th>
+                </tr>
+                {% set total_pendapatan = 0 %}
+                {% for t in transaksi %}
+                <tr>
+                    <td>{{ t.id }}</td>
+                    <td>{{ t.item }}</td>
+                    <td>Rp {{ "{:,.0f}".format(t.harga|int) }}</td>
+                    <td>{{ t.jumlah|int }}</td>
+                    <td>Rp {{ "{:,.0f}".format(t.total|int) }}</td>
+                    <td>
+                        <a class="edit" href="/dashboard/edit/{{ t.id }}">Edit</a> |
+                        <a class="delete" href="/delete/{{ t.id }}">Hapus</a>
+                    </td>
+                </tr>
+                {% set total_pendapatan = total_pendapatan + (t.total|int) %}
+                {% endfor %}
+            </table>
+
+            <div class="total">
+                Total Pendapatan: Rp {{ "{:,.0f}".format(total_pendapatan) }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
